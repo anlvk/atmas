@@ -1,0 +1,16 @@
+{
+    "name": "app/amasty",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "App\\Amasty\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hanna Liauchuk",
+            "email": "anne.levchuk@gmail.com"
+        }
+    ],
+    "require": {}
+}

@@ -1,0 +1,17 @@
+<?php
+
+use App\Amasty\RequestStatus;
+
+$statuses = RequestStatus::STATUSES;
+
+?>
+
+<tr>
+  <td><?php echo $task['task_id']; ?></td>
+  <td><?php echo $task['created_date']; ?></td>
+  <td><?php echo $task['updated_date']; ?></td>
+  <td><?php echo $statuses[$task['status']]; ?></td>
+  <td><?php echo $task['title']; ?></td>
+  <td class="truncate"><?php echo $task['description']; ?></td>
+  <td class="action">Изменить статус / Удалить</td>
+</tr>

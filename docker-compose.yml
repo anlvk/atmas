@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+   nginx:
+     build: ./nginx/
+     ports:
+       - 80:80
+
+     volumes:
+         - ./php_code:/var/www/html
+
+   php:
+     build: ./php/
+     expose:
+       - 9000
+     volumes:
+        - ./php_code:/var/www/html
+
+
+   db:
+      image: mariadb
+      volumes:
+        -    mysql-data:/var/lib/mysql
+      environment:
+       MYSQL_ROOT_PASSWORD: mariadb
+       MYSQL_DATABASE: amasty
+      ports:
+      - "33061:3306"
+
+   adminer:
+     image: adminer
+     container_name: adminer
+     restart: unless-stopped
+     ports:
+       - "8081:8080"
+
+
+volumes:
+    mysql-data:

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div>
+      <table style="border: 1px solid black;">
+
+    <tr style="border: 1px solid black;">
+      <th style="border: 1px solid black;">Task ID</th>
+      <th style="border: 1px solid black;">Created date</th>
+      <th style="border: 1px solid black;">Updated date</th>
+      <th style="border: 1px solid black;">Status</th>
+      <th style="border: 1px solid black;">Description</th>
+    </tr>
+    <?php
+      foreach($tasks as $task) {
+        include("templates/task.html");
+      }
+    ?>
+      </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+#requests, #requests tr, th, td {
+    border: 1px solid black;
+}
+
+#requests tr, th, td {
+  padding: 10px;
+}
+
+#requests th.request-id,
+#requests th.created,
+#requests th.updated,
+#requests th.status {
+    cursor: pointer;
+}
+
+#requests td.action {
+    color: grey;
+}
+
+/**
+.truncate {
+  width: 1000px;               // Required width
+  white-space: nowrap;         // Prevents wrapping
+  overflow: hidden;            // Hides overflowed text
+  text-overflow: ellipsis;     // Adds "..."
+}
+
+.multi-line-truncate {
+  display: -webkit-box;         // Necessary for line-clamp
+  -webkit-box-orient: vertical; // Sets container orientation
+  -webkit-line-clamp: 3;        // Number of lines to show
+  overflow: hidden;             // Hides overflowed text
+}
+*/
+
+#login, #password {
+    padding: 30px 50px;
+    margin: 50px;
+    display: inline;
+}
+
+input[type="button"] {
+    cursor: pointer;
+}
