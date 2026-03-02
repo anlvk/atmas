@@ -16,13 +16,14 @@ class Request {
         $this->conn = $db;
     }
 
-    public function createRequest($description, $status = 1) {
-        $statement = $this->conn->prepare('INSERT INTO requests (description, status)
-              VALUES (:description, :status)');
+    public function createRequest($description, $title, $status = 1) {
+        $statement = $this->conn->prepare('INSERT INTO requests (description, status, title)
+              VALUES (:description, :status, :title)');
 
         return $statement->execute([
           'description' => $description,
           'status' => $status,
+          'title' => $title,
         ]);
     }
 
@@ -35,7 +36,6 @@ class Request {
     }
 
     public function load(int $ID) {
-      $this->task_id = $ID;
       $statement = $this->conn->prepare('SELECT * FROM requests WHERE task_id = :task_id');
 
       $statement->execute([
@@ -45,22 +45,13 @@ class Request {
       return $statement->fetchAll();
     }
 
-    public function load2(int $ID) {
-      $this->task_id = $ID;
-      $statement = $this->conn->prepare('SELECT * FROM requests WHERE task_id = :task_id');
-
-      #$statement->setFetchMode(\PDO::FETCH_CLASS, Request::class, $this->conn);
-      $statement->execute([
-        'task_id' => $ID,
-      ]);
-
-      return $statement->fetchAll();
-    }
-
-    public function update() {
-      $statement = $this->conn->prepare('SELECT * FROM requests WHERE task_id = :task_id');
+    public function update(int $ID, string $description, string $title, int $status) {
+      $statement = $this->conn->prepare('UPDATE requests SET description = :description, status = :status, title = :title WHERE task_id = :task_id');
 
       $statement->execute([
+        'description' => $description,
+        'status' => $status,
+        'title' => $title,
         'task_id' => $ID,
       ]);
 

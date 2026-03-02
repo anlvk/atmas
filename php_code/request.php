@@ -15,21 +15,24 @@ $requestID = (int) (isset($uriExpression[2]) ? $uriExpression[2] : FALSE);
 $request = new Request($db);
 
 if($requestID) {
-    $loaded = $request->load2($requestID)[0] ?? FALSE;
-    var_dump($loaded);
-} elseif (isset($_POST['description']) && $_POST['statuses']) {
-  $request->createRequest($_POST['description'], $_POST['statuses']);
-  // Source - https://stackoverflow.com/a/29191719
-// Posted by ThehalfHeart, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-02-22, License - CC BY-SA 3.0
-
-    header('Location: http://localhost/requests');
-    exit();
+    $loaded = $request->load($requestID)[0] ?? FALSE;
 
 }
 
-if(isset($_POST)) {
+if($_POST) {
+  if($requestID) {
+    $request->update($requestID, $_POST['description'], $_POST['title'], $_POST['statuses']);
+  } else {
+  var_dump($requestID);
+    var_dump('else if');
+    $request->createRequest($_POST['description'], $_POST['title'], $_POST['statuses']);
+    // Source - https://stackoverflow.com/a/29191719
+  // Posted by ThehalfHeart, modified by community. See post 'Timeline' for change history
+  // Retrieved 2026-02-22, License - CC BY-SA 3.0
+    header('Location: http://localhost/requests');
+    exit();
 
+  }
 }
 
  ?>
@@ -46,11 +49,12 @@ if(isset($_POST)) {
  <body>
 
  <div>
-     <form action="/request" method="POST">
+     <?php $action = ($requestID) ? "/request/$requestID": "/request"; ?>
+     <form action=<?php echo $action; ?> method="POST">
          <label for="title">Title</label>
          <input type="text" name="title" value="<?php echo $loaded['title'] ?? ''; ?>"><br>
          <label for="description">Description</label>
-         <textarea type="text" name="description" rows=10 maxlength="250">
+         <textarea type="text" name="description" rows=10 cols=50 maxlength="250">
               <?php echo $loaded['description'] ?? ''; ?>
          </textarea><br>
          <label for="statuses">Status</label>
