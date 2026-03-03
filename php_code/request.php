@@ -67,8 +67,11 @@ if($_POST) {
 
      <br><br>
      <div>
-       <h2> Response </h2>
-       <?php include_once('response.php'); ?>
+       <?php if($requestID): ?>
+         <h2> Response </h2>
+       <?php
+           include_once('response.php');
+             endif; ?>
      </div>
  </div>
 
