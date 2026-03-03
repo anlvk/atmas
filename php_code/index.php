@@ -18,6 +18,11 @@ if(preg_match("/^\/request\/([a-z0-9\-]+)\/?$/", $request)) {
   exit;
 }
 
+if(preg_match("/^\/request\/([a-z0-9\-]+)\/response\/?$/", $request)) {
+  require_once(__DIR__ . "/response.php");
+  exit;
+}
+
 $result = match($request) {
     "/authorize" => require_once(__DIR__ . "/auth.php"),
     "/logout" => require_once(__DIR__ . "/logout.php"),
@@ -29,6 +34,8 @@ $result = match($request) {
 
     "/requests" => require_once(__DIR__ . "/requests.php"),
     "/request" => require_once(__DIR__ . "/request.php"),
+
+    "/response" => require_once(__DIR__ . "/response.php"),
 
     default => http_response_code(404),
 };

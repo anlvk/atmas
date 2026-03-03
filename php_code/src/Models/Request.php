@@ -16,12 +16,12 @@ class Request {
         $this->conn = $db;
     }
 
-    public function createRequest($description, $title, $status = 1) {
+    public function create($description, $title, $status = 1) {
         $statement = $this->conn->prepare('INSERT INTO requests (description, status, title)
               VALUES (:description, :status, :title)');
 
         return $statement->execute([
-          'description' => $description,
+          'description' => trim($description),
           'status' => $status,
           'title' => $title,
         ]);
@@ -49,7 +49,7 @@ class Request {
       $statement = $this->conn->prepare('UPDATE requests SET description = :description, status = :status, title = :title WHERE task_id = :task_id');
 
       $statement->execute([
-        'description' => $description,
+        'description' => trim($description),
         'status' => $status,
         'title' => $title,
         'task_id' => $ID,
